@@ -54,12 +54,12 @@
 	line-height: 50px;
 }
 
-.files-widget-dropbox .preview .thumbnail {
+.files-widget-dropbox .preview .thumb {
 	vertical-align: middle;
     background: url(/static/files_widget/img/transparent-bg.gif) left top;
 }
 
-.files-widget-dropbox .preview.new .thumbnail {
+.files-widget-dropbox .preview.new .thumb {
 	opacity: .5;
 }
 

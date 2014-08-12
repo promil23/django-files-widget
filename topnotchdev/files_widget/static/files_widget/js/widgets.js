@@ -13,7 +13,7 @@ $(function(){
     template =
         '<div class="new preview">'+
             '<span class="image-holder">'+
-                '<img class="thumbnail" />'+
+                '<img class="thumb" />'+
                 '<span class="buttons">'+
                     '<a href="javascript:void(0)" class="enlarge-button">'+
                         '<img src="'+ staticURL + 'files_widget/img/enlarge_button.png" />'+
@@ -159,14 +159,14 @@ $(function(){
         $.get(thumbnailURL,
                 'img=' + encodeURIComponent(imagePath) + '&preview_size=' + previewSize,
                 function(data) {
-            preview.find('.thumbnail')
+            preview.find('.thumb')
                 .css({ 'width': '', 'height': '' }).attr('src', data);;
             preview.removeClass('new');
         });
     }
 
     function generateThumbnail(preview, file) {
-        var image = $('.thumbnail', preview),
+        var image = $('.thumb', preview),
             reader = new FileReader(),
             dropbox = preview.closest('.files-widget-dropbox'),
             previewSize = dropbox.data('preview-size'),
@@ -217,7 +217,7 @@ $(function(){
         preview.find('.progress-holder, .filename').remove();
 
         if (thumbnailPath) {
-            preview.find('.thumbnail')
+            preview.find('.thumb')
                 .css({ 'width': '', 'height': '' }).attr('src', thumbnailPath);
         } else {
             downloadThumbnail(preview);
@@ -256,7 +256,7 @@ $(function(){
             path = preview.data('image-path');
 
         function doDelete() {
-            $('.icon', deletedPreview).attr('src', preview.find('.thumbnail').attr('src'));
+            $('.icon', deletedPreview).attr('src', preview.find('.thumb').attr('src'));
             $('.name', deletedPreview).text(filenameFromPath(path));
             deletedPreview.attr('data-image-path', path);
             deletedContainer.show();

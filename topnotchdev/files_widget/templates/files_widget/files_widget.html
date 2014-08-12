@@ -11,7 +11,7 @@
         {% for path_to_file in files.splitlines %}{% spaceless %}
             <div class="preview" data-image-path="{{ path_to_file }}">
                 <span class="image-holder">
-                    <img class="thumbnail" src="{% include 'files_widget/includes/thumbnail.html' %}" />
+                    <img class="thumb" src="{% include 'files_widget/includes/thumbnail.html' %}" />
                     <span class="buttons">
                         <a href="javascript:void(0)" class="enlarge-button">
                             <img src="{{ STATIC_URL }}files_widget/img/enlarge_button.png" />
