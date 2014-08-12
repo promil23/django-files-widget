@@ -67,11 +67,9 @@ Quick Start
     
 (Optional) basic settings with their defaults:
 
-    FILES_WIDGET_TEMP_DIR            # 'temp/files_widget/'
     FILES_WIDGET_FILES_DIR           # 'uploads/files_widget/'
     FILES_WIDGET_JQUERY_PATH         # (jQuery 1.9.1 from Google)
     FILES_WIDGET_JQUERY_UI_PATH      # (jQuery UI 1.10.3 from Google)
-    FILES_WIDGET_USE_FILEBROWSER     # False
     FILES_WIDGET_FILEBROWSER_JS_PATH # 'filebrowser/js/AddFileBrowser.js'
     
 ### In `urls.py` ###
@@ -83,7 +81,6 @@ Quick Start
     from topnotchdev import files_widget
   
     class MyModel(models.Model):
-        image = files_widget.ImageField()
         images = files_widget.ImagesField()
 
 ### Django Auth User Permissions (optional) ###
@@ -147,31 +144,19 @@ Navigation
 
 ### Settings
 
-- [`FILES_WIDGET_TEMP_DIR`](#FILES_WIDGET_TEMP_DIR)
 - [`FILES_WIDGET_FILES_DIR`](#FILES_WIDGET_FILES_DIR)
 - [`FILES_WIDGET_JQUERY_PATH`](#FILES_WIDGET_JQUERY_PATH)
 - [`FILES_WIDGET_JQUERY_UI_PATH`](#FILES_WIDGET_JQUERY_UI_PATH)
-- [`FILES_WIDGET_USE_FILEBROWSER`](#FILES_WIDGET_WITH_FILEBROWSER)
 - [`FILES_WIDGET_FILEBROWSER_JS_PATH`](#FILES_WIDGET_FILEBROWSER_JS_PATH)
-- [`FILES_WIDGET_MAX_FILESIZE`](#FILES_WIDGET_MAX_FILESIZE) (not yet implemented)
-- [`FILES_WIDGET_FILE_TYPES`](#FILES_WIDGET_FILE_TYPES) (not yet implemented)
-- [`FILES_WIDGET_USE_TRASH`](#FILES_WIDGET_USE_TRASH) (not yet implemented)
-- [`FILES_WIDGET_TRASH_DIR`](#FILES_WIDGET_TRASH_DIR) (not yet implemented)
 
 ### Model Fields
 
-- [`files_widget.FileField()`](#FileField) (not yet implemented)
-- [`files_widget.FilesField()`](#FilesField) (not yet implemented)
 - [`files_widget.ImageField()`](#ImageField)
 - [`files_widget.ImagesField()`](#ImagesField)
 
 ### Model Field Options
 
 - [`max_length`](#max_length)
-- [`on_delete`](#on_delete) (not yet implemented)
-- [`max_files`](#max_files) (not yet implemented)
-- [`max_filesize`](#max_filesize) (not yet implemented)
-- [`file_types`](#file_types) (not yet implemented)
 
 ### FilesField and ImagesField Instance Attributes
 
@@ -187,7 +172,7 @@ Navigation
 - [`as_gallery()`](#as_gallery) (not yet implemented)
 - [`as_carousel()`](#as_carousel) (not yet implemented)
 
-### FileField, FilesField, ImageField and ImagesField Instance Attributes
+### FilesField, ImagesField Instance Attributes
 
 - [(unicode)](#unicode)
 - [`settings`](#settings-attr)
@@ -208,31 +193,12 @@ Navigation
 - [`get_created_time()`](#get_created_time)
 - [`get_modified_time()`](#get_modified_time)
 
-### Django Auth Permissions
-
-- [`files_widget.can_upload_files`](#can_upload_files)
-- [`files_widget.can_remove_files`](#can_remove_files) (not yet implemented)
-
 ### Static Files Inclusion
 
 - [`form.media`](#form.media)
 - [`files_widget/media.html`](#media.html) (not yet implemented)
 - [Manual](#manual-inclusion)
 
-### Signals
-
-- [`files_widget.signals.pre_upload`](#pre_upload) (not yet implemented)
-- [`files_widget.signals.post_upload`](#post_upload) (not yet implemented)
-- [`files_widget.signals.pre_move`](#pre_move) (not yet implemented)
-- [`files_widget.signals.post_move`](#post_move) (not yet implemented)
-- [`files_widget.signals.pre_delete`](#pre_delete) (not yet implemented)
-- [`files_widget.signals.post_delete`](#post_delete) (not yet implemented)
-
 ### Signal Handlers
 
 - [`post_save`](#django.post_save)
-- [`post_delete`](#django.post_delete) (not yet implemented)
-
-### Management Commands
-
-- [`manage.py files_widget cleanup`](#cleanup) (not yet implemented)
