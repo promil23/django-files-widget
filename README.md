@@ -3,19 +3,18 @@ django-files-widget
 
 Django AJAX form widgets and model fields for multiple files/images upload with progress bar
 
-__This is currently an alpha release. Not all functionality is there, only `ImageField` and `ImagesField` have been implemented and there is not yet enough error handling.__
+__This is currently an alpha release. Not all functionality is there, only `ImagesField` have been implemented and there is not yet enough error handling.__
 
 Features
 --------
 
 - Drag &amp; drop file uploading via AJAX
-- Plus three other ways to add files: upload button, Django Filebrowser library, and by URL
+- Plus 2 other ways to add files: upload button or by URL
 - Uploading multiple files at once
 - Upload progress bar
-- Four model fields with corresponding form fields and widgets: `ImagesField`, `ImageField`, `FilesField`, and `FileField`
+- 2 model fields with corresponding form fields and widgets: `ImagesField` and `FilesField`
 - Image gallery widget with drag &amp; drop reordering
-- Documents gallery widget with file type icons with drag &amp; drop reordering
-- Integrates with Django Admin, [Grappelli](https://github.com/sehmaschine/django-grappelli), [Django Filebrowser](https://github.com/sehmaschine/django-filebrowser) and [Mezzanine](http://mezzanine.jupo.org/)
+- Integrates with Django Admin, [Grappelli](https://github.com/sehmaschine/django-grappelli) 
 
 Screenshots
 -----------
