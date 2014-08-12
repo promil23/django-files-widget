@@ -42,14 +42,13 @@ Quick Start
 - Django 1.5 or later
 - [sorl-thumbnail](https://github.com/sorl/sorl-thumbnail)
 - [Pillow](https://github.com/python-imaging/Pillow) (or PIL)
-- Unix/Linux (file saving uses `os.link()`)
 - jQuery 1.7 or later
-- jQuery UI
+- jQuery UI (included)
 - [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload) (included)
 
 ### Install ###
 
-    pip install git+git://github.com/TND/django-files-widget.git
+    pip install git+git://github.com/lukaszbanasiak/django-files-widget.git
 
 ### In `settings.py` ###
 
@@ -69,8 +68,7 @@ Quick Start
     FILES_WIDGET_FILES_DIR           # 'uploads/files_widget/'
     FILES_WIDGET_JQUERY_PATH         # (jQuery 1.9.1 from Google)
     FILES_WIDGET_JQUERY_UI_PATH      # (jQuery UI 1.10.3 from Google)
-    FILES_WIDGET_FILEBROWSER_JS_PATH # 'filebrowser/js/AddFileBrowser.js'
-    
+
 ### In `urls.py` ###
 
     url(r'^files-widget/', include('topnotchdev.files_widget.urls')),
