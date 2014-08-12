@@ -144,11 +144,10 @@ Navigation
 - [`FILES_WIDGET_FILES_DIR`](#FILES_WIDGET_FILES_DIR)
 - [`FILES_WIDGET_JQUERY_PATH`](#FILES_WIDGET_JQUERY_PATH)
 - [`FILES_WIDGET_JQUERY_UI_PATH`](#FILES_WIDGET_JQUERY_UI_PATH)
-- [`FILES_WIDGET_FILEBROWSER_JS_PATH`](#FILES_WIDGET_FILEBROWSER_JS_PATH)
 
 ### Model Fields
 
-- [`files_widget.ImageField()`](#ImageField)
+- [`files_widget.FilesField()`](#FilesField)
 - [`files_widget.ImagesField()`](#ImagesField)
 
 ### Model Field Options
