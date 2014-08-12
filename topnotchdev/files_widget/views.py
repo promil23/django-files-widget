@@ -1,58 +1,44 @@
+from django.http import Http404, HttpResponse
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 import json
 
-from django.http import Http404, HttpResponse, HttpResponseBadRequest
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
-from django.template.loader import render_to_string
-from django.contrib.auth.decorators import permission_required
+from settings import FILES_DIR
+from controllers import ImagePath
 
-from files import save_upload
-from controllers import FilePath, ImagePath
 
-@permission_required('files_widget.can_upload_files')
 def upload(request):
     if not request.method == 'POST':
         raise Http404
 
-    # if request.is_ajax():
-    #     # the file is stored raw in the request
-    #     upload = request
-    #     is_raw = True
-    #     # AJAX Upload will pass the filename in the querystring if it is the "advanced" ajax upload
-    #     try:
-    #         filename = request.GET['files[0]']
-    #     except KeyError:
-    #         return HttpResponseBadRequest(json.dumps({
-    #             'success': False,
-    #             'message': 'Error while uploading file',
-    #         }))
-    # not an ajax upload, so it was the "basic" iframe version with submission via form
-    # else:
-    is_raw = False
-    if len(request.FILES) == 1:
-        upload = request.FILES.values()[0]
-    else:
-        return HttpResponseBadRequest(json.dumps({
-            'success': False,
-            'message': 'Error while uploading file.',
-        }))
-    filename = upload.name
-    
-    path_to_file = save_upload(upload, filename, is_raw, request.user)
-    MEDIA_URL = settings.MEDIA_URL
+    response_data = {}
+    if request.is_ajax():
+        if request.FILES:
+            files = request.FILES.values()[0]
+            path = default_storage.save('{}/{}/{}'.format(FILES_DIR,
+                                                          request.user.pk,
+                                                          files.name), ContentFile(files.read()))
+            try:
+                preview_size = request.POST['preview_size']
+            except KeyError:
+                preview_size = '64'
+            response_data['status'] = True
+            response_data['imagePath'] = path
+            response_data['thumbnail'] = render_to_string('files_widget/includes/thumbnail.html',
+                                                          {'MEDIA_URL': settings.MEDIA_URL,
+                                                           'STATIC_URL': settings.STATIC_URL,
+                                                           'preview_size': preview_size})
+            return HttpResponse(json.dumps(response_data), content_type="application/json")
 
-    if 'preview_size' in request.POST:
-        preview_size = request.POST['preview_size']
-    else:
-        preview_size = '64'
+        else:
+            response_data['status'] = False
+            response_data['message'] = "We're sorry, but something went wrong."
+            return HttpResponse(json.dumps(response_data), content_type='application/json')
 
-    return HttpResponse(json.dumps({
-        'success': True,
-        'imagePath': path_to_file,
-        'thumbnailPath': render_to_string('files_widget/includes/thumbnail.html', locals()),
-    }))
 
-@permission_required('files_widget.can_upload_files')
 def thumbnail_url(request):
     if not 'img' in request.GET or not 'preview_size' in request.GET:
         raise Http404
