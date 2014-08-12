@@ -1,6 +1,6 @@
 import re
 import urllib
-import os, os.path
+import os
 from datetime import datetime
 
 from django.conf import settings
@@ -8,12 +8,9 @@ from django.utils import six
 from django.utils.safestring import mark_safe
 from django.utils.functional import curry
 from django.core.files.images import ImageFile
-from django.core.files.storage import get_storage_class
 from django.contrib.staticfiles import finders
 
 from sorl.thumbnail import get_thumbnail
-
-from conf import *
 
 
 class FilePath(unicode):
@@ -54,13 +51,13 @@ class FilePath(unicode):
     @property
     def url(self):
         if not self.startswith('/') and self.find('//') == -1:
-            return os.path.join(MEDIA_URL, self.escaped)
+            return os.path.join(settings.MEDIA_URL, self.escaped)
         return self.escaped
 
     @property
     def local_path(self):
         if not self.startswith('/') and self.find('//') == -1:
-            return os.path.join(MEDIA_ROOT, urllib.unquote(self))
+            return os.path.join(settings.MEDIA_ROOT, urllib.unquote(self))
         return self
 
     def _get_local_path_or_file(self):
@@ -106,17 +103,17 @@ class FilePath(unicode):
         return self._size
 
     def get_accessed_time(self):
-        if self._accessed_time == None:
+        if self._accessed_time is None:
             self._accessed_time = datetime.fromtimestamp(os.path.getatime(self.local_path))
         return self._accessed_time
 
     def get_created_time(self):
-        if self._created_time == None:
+        if self._created_time is None:
             self._created_time = datetime.fromtimestamp(os.path.getctime(self.local_path))
         return self._created_time
 
     def get_modified_time(self):
-        if self._modified_time == None:
+        if self._modified_time is None:
             self._modified_time = datetime.fromtimestamp(os.path.getmtime(self.local_path))
         return self._modified_time
 
@@ -150,7 +147,7 @@ class ImagePath(FilePath):
         attrs.update(self.settings['thumbnail_attrs'])
         attrs.update(kwargs)
 
-        all_attrs = { 'size': size }
+        all_attrs = {'size': size}
         all_attrs.update(attrs)
         key = hash(frozenset(all_attrs))
 

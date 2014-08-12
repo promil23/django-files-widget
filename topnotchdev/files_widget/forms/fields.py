@@ -1,13 +1,10 @@
 from django import forms
-from django.core import exceptions, validators
-from django.utils.translation import ugettext_lazy as _
-
-from topnotchdev.files_widget.conf import *
 
 
 class UnicodeWithAttr(unicode):
     deleted_files = None
     moved_files = None
+
 
 class FilesFormField(forms.MultiValueField):
     def __init__(self, max_length=None, **kwargs):
