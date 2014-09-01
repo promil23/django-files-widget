@@ -3,10 +3,11 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from PIL import Image
 
 import json
 
-from settings import FILES_DIR
+from settings import FILES_DIR, PROJECT_DIR, IMAGE_QUALITY
 from controllers import ImagePath
 
 
@@ -21,6 +22,13 @@ def upload(request):
             path = default_storage.save('{}/{}/{}'.format(FILES_DIR,
                                                           request.user.pk,
                                                           files.name), ContentFile(files.read()))
+            try:
+                full_path = PROJECT_DIR+'/'+path
+                img = Image.open(full_path)
+                img.save(full_path, quality=IMAGE_QUALITY)
+            except:
+                pass
+                
             try:
                 preview_size = request.POST['preview_size']
             except KeyError:
