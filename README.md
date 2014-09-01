@@ -48,7 +48,7 @@ Quick Start
 
 ### Install ###
 
-    pip install git+git://github.com/lukaszbanasiak/django-files-widget.git
+    pip install git+git://github.com/dellax/django-files-widget
 
 ### In `settings.py` ###
 
@@ -68,6 +68,7 @@ Quick Start
     FILES_WIDGET_FILES_DIR           # 'uploads/files_widget/'
     FILES_WIDGET_JQUERY_PATH         # (jQuery 1.9.1 from Google)
     FILES_WIDGET_JQUERY_UI_PATH      # (jQuery UI 1.10.3 from Google)
+    FILES_WIDGET_IMAGE_QUALITY       # 50
 
 ### In `urls.py` ###
 
