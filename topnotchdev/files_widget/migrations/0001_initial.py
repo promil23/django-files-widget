@@ -24,7 +24,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('icon_set', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['files_widget.IconSet'])),
             ('extension', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
-            ('image', self.gf('topnotchdev.files_widget.fields.ImageField')(max_length=200)),
+            ('image', self.gf('topnotchdev.files_widget.fields.ImagesField')(max_length=200)),
             ('display_text_overlay', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('overlay_text', self.gf('django.db.models.fields.CharField')(max_length=7, null=True, blank=True)),
             ('base_color', self.gf('django.db.models.fields.CharField')(max_length=12, null=True, blank=True)),
@@ -48,7 +48,7 @@ class Migration(SchemaMigration):
             'extension': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'icon_set': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['files_widget.IconSet']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('topnotchdev.files_widget.fields.ImageField', [], {'max_length': '200'}),
+            'image': ('topnotchdev.files_widget.fields.ImagesField', [], {'max_length': '200'}),
             'overlay_text': ('django.db.models.fields.CharField', [], {'max_length': '7', 'null': 'True', 'blank': 'True'})
         },
         u'files_widget.iconset': {
