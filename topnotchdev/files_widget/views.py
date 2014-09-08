@@ -19,7 +19,7 @@ def upload(request):
     if request.is_ajax():
         if request.FILES:
             files = request.FILES.values()[0]
-            path = default_storage.save('{}/{}/{}'.format(FILES_DIR,
+            path = default_storage.save('{}{}/{}'.format(FILES_DIR,
                                                           request.user.pk,
                                                           files.name), ContentFile(files.read()))
             try:
