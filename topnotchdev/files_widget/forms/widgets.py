@@ -3,13 +3,15 @@ from django.template.loader import render_to_string
 
 from topnotchdev.files_widget.settings import *
 
+class VisibleHiddenInput(forms.HiddenInput):
+    is_hidden=False
 
 class BaseFilesWidget(forms.MultiWidget):
     def __init__(self,
                  multiple=False,
                  preview_size=150,
                  template="files_widget/files_widget.html",
-                 widgets=(forms.HiddenInput, forms.HiddenInput, forms.HiddenInput, ),
+                 widgets=tuple([VisibleHiddenInput]*3),
                  **kwargs):
         super(BaseFilesWidget, self).__init__(widgets, **kwargs)
         self.multiple = multiple
