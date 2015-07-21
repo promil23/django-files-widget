@@ -322,11 +322,11 @@ $(function(){
             initialFileNames = splitlines(hiddenInput.val()),
             name;
 
-        for (name in initialFileNames) {
-            if (!initialFiles.filter('[data-image-path="' + initialFileNames[name] + '"]').length) {
-                addPreview(dropbox, initialFileNames[name], null, null, true);
+        for (var i=0; i < initialFileNames.length; i++) {
+            if (!initialFiles.filter('[data-image-path="' + initialFileNames[i] + '"]').length) {
+                addPreview(dropbox, initialFileNames[i], null, null, true);
             }
-        }
+         }
 
         initialFiles = $('.preview', dropbox);
         if (initialFiles.length) {
