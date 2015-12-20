@@ -1,7 +1,7 @@
-from django.template import Library
-from sorl.thumbnail.templatetags import thumbnail
+from django import template
+from sorl.thumbnail.templatetags.thumbnail import thumbnail
 
-register = Library()    
+register = template.Library()
 
 def sorl_thumbnail(parser, token):
     return thumbnail(parser, token)
