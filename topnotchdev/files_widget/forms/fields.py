@@ -1,7 +1,7 @@
 from django import forms
 
 
-class UnicodeWithAttr(unicode):
+class UnicodeWithAttr(str):
     deleted_files = None
     moved_files = None
 
@@ -22,7 +22,7 @@ class FilesFormField(forms.MultiValueField):
         -   if self.required and field_value in validators.EMPTY_VALUES:
         +   if field.required and field_value in validators.EMPTY_VALUES:
         """
-        from django.forms.util import ErrorList
+        from django.forms.utils import ErrorList
         from django.core import validators
         from django.core.exceptions import ValidationError
 

@@ -7,8 +7,8 @@ from PIL import Image
 
 import json
 
-from settings import FILES_DIR, PROJECT_DIR, IMAGE_QUALITY
-from controllers import ImagePath
+from django.conf import settings
+from topnotchdev.files_widget.controllers import ImagePath
 
 
 def upload(request):
@@ -18,15 +18,19 @@ def upload(request):
     response_data = {}
     if request.is_ajax():
         if request.FILES:
-            files = request.FILES.values()[0]
-            path = default_storage.save('{}{}/{}'.format(FILES_DIR,
+            #print(request.FILES)
+            #files = request.FILES.values()[0]
+            files = request.FILES['files[]']
+            path = default_storage.save('{}/{}/{}'.format(getattr(settings, 'FILES_DIR', 'uploads/files_widget'),
                                                           request.user.pk,
                                                           files.name), ContentFile(files.read()))
             try:
-                full_path = PROJECT_DIR+'/'+path
+                #full_path = settings.PROJECT_DIR+'/'+path
+                full_path = settings.MEDIA_ROOT +'/'+path
                 img = Image.open(full_path)
-                img.save(full_path, quality=IMAGE_QUALITY)
+                img.save(full_path, quality=settings.IMAGE_QUALITY)
             except:
+                print('errrrorsaving')
                 pass
                 
             try:

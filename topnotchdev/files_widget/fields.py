@@ -2,9 +2,9 @@ from django.db import models
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from forms import FilesFormField, BaseFilesWidget, FilesWidget, ImagesWidget
-import controllers
-from settings import *
+from .forms import FilesFormField, BaseFilesWidget, FilesWidget, ImagesWidget
+from topnotchdev.files_widget import controllers
+from django.conf import settings
 
 
 def formfield_defaults(self, default_widget=None, widget=None, form_class=FilesFormField, required=True, **kwargs):
@@ -25,9 +25,9 @@ def save_all_data(self, instance, data):
     # Save old data to know which images are deleted.
     # We don't know yet if the form will really be saved.
     old_data = getattr(instance, self.name)
-    setattr(instance, OLD_VALUE_STR % self.name, old_data)
-    setattr(instance, DELETED_VALUE_STR % self.name, data.deleted_files)
-    setattr(instance, MOVED_VALUE_STR % self.name, data.moved_files)
+    setattr(instance, getattr(settings, 'OLD_VALUE_STR', 'old_%s_value') % self.name, old_data)
+    setattr(instance, getattr(settings, 'DELETED_VALUE_STR', 'deleted_%s_value') % self.name, data.deleted_files)
+    setattr(instance, getattr(settings, 'MOVED_VALUE_STR', 'moved_%s_valu') % self.name, data.moved_files)
 
 
 class FilesField(models.TextField):
@@ -39,7 +39,9 @@ class FilesField(models.TextField):
         setattr(cls, self.name, controllers.FilesDescriptor(self))
 
     def save_form_data(self, instance, data):
+        print('kkkkkk')
         save_all_data(self, instance, data)
+        print(dir(instance))
         super(FilesField, self).save_form_data(instance, data)
 
     def formfield(self, default_widget=FilesWidget(), **kwargs):
